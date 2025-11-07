@@ -152,7 +152,7 @@ python-blueprint/
 └── README.md
 ```
 
-### 🧠 Why uv?
+### 🧠 Why uv?
 
 **uv** is the next-generation Python package manager. It replaces pip + venv + pip-tools with a single, fast, deterministic tool that:
 
@@ -166,7 +166,7 @@ python-blueprint/
 
 MIT License © 2025 Salvatore D'Angelo / Code4Projects
 
-### ✨ Summary
+### ✨ Summary
 
 Python Blueprint helps you:
 
@@ -175,6 +175,6 @@ Python Blueprint helps you:
 - Integrate best practices for security and maintainability
 - Focus on building, not on boilerplate
 
-#### 💡 Stop spending hours setting up your project.
+### 💡 Stop spending hours setting up your project.
 
 Start coding in minutes — with Python Blueprint.
