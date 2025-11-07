@@ -56,3 +56,9 @@ repos:
     hooks:
       - id: prettier
         types_or: [json, markdown, yaml]
+
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.5
+    hooks:
+      - id: remove-tabs
+      - id: forbid-crlf
