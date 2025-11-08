@@ -1,6 +1,6 @@
 import unittest
 
-from src.hello import say_hello
+from python_blueprint.hello import say_hello
 
 
 class TestHello(unittest.TestCase):

@@ -83,18 +83,25 @@ git clone https://github.com/your-org/python-blueprint.git
 cd python-blueprint
 ```
 
+### 2️⃣ Install Python 3.14
+
+```bash
+uv python install 3.14
+uv python pin 3.14  # pins this version for the project
+```
+
 ### 2️⃣ Sync Dependencies with uv
 
 This creates and activates a virtual environment automatically, installing all development dependencies (linters, formatters, type checkers, test tools, etc.).
 
 ```bash
-uv sync --group development
+uv sync --group dev
 ```
 
 ### 3️⃣ Run the Project
 
 ```bash
-uv run python main.py
+uv run python -m python_blueprint.hello
 ```
 
 Expected output:
@@ -108,7 +115,14 @@ Hello, Python Blueprint! 👋
 All tests are located under tests/ and automatically discovered by pytest.
 
 ```bash
-uv run pytest
+uv run pytest tests
+```
+
+To check the coverage you can run:
+
+```bash
+uv run coverage run -m pytest
+uv run coverage report
 ```
 
 ### 🧪 Running Tools Manually
@@ -116,11 +130,11 @@ uv run pytest
 Run individual tools via uv run:
 
 ```bash
-uv run black .
-uv run flake8 .
-uv run isort .
-uv run mypy .
-uv run bandit -r .
+uv run black src tests/
+uv run flake8 src tests
+uv run isort src tests/
+uv run mypy src
+uv run bandit -r src
 uv run detect-secrets scan
 ```
 
