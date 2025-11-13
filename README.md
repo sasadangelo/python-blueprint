@@ -83,7 +83,7 @@ git clone https://github.com/your-org/python-blueprint.git
 cd python-blueprint
 ```
 
-### 2️⃣ Install Python 3.14
+### 2️⃣ Install Python 3.14
 
 ```bash
 uv python install 3.14
