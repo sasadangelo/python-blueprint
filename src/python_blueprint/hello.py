@@ -4,4 +4,4 @@ def say_hello(name: str) -> str:
 
 
 if __name__ == "__main__":
-    print(say_hello("World"))
+    print(say_hello(name="World"))
