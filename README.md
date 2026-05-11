@@ -59,22 +59,51 @@ The project comes with a full **`.pre-commit-config.yaml`** that enforces code h
 | Tool                                           | Purpose                                         |
 | ---------------------------------------------- | ----------------------------------------------- |
 | **check-yaml, check-json, check-toml**         | Validate syntax for config files                |
-| **check-ast**                                  | Ensure Python files are syntactically correct   |
-| **end-of-file-fixer**, **trailing-whitespace** | Keep files clean and consistent                 |
-| **pyupgrade**                                  | Modernize syntax automatically (`--py310-plus`) |
-| **black**                                      | Enforce consistent code formatting              |
-| **isort**                                      | Sort and group imports properly                 |
-| **flake8**                                     | Detect code smells and style violations         |
+| **check-added-large-files**                    | Prevent committing large files                  |
+| **check-case-conflict**                        | Detect case conflicts in filenames              |
+| **check-merge-conflict**                       | Detect merge conflict markers                   |
+| **ruff**                                       | Fast linter and formatter (replaces flake8, black, isort, pyupgrade, and handles whitespace/line endings) |
 | **mypy**                                       | Perform static type checking                    |
 | **bandit**                                     | Identify common security vulnerabilities        |
 | **detect-secrets**                             | Prevent accidental secret leaks                 |
-| **prettier**                                   | Format Markdown, YAML, and JSON files           |
 
-Together, these hooks ensure that every commit meets your team’s standards before it ever reaches the repository.
+Together, these hooks ensure that every commit meets your team's standards before it ever reaches the repository.
 
 ---
 
 ## ⚙️ Setup
+
+### 📋 Prerequisites
+
+Before starting, ensure you have the following installed:
+
+#### Install Ruff on Terminal
+
+Ruff is a fast Python linter and formatter. Install it globally:
+
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/ruff/install.sh | sh
+
+# Or using pip
+pip install ruff
+
+# Or using uv
+uv tool install ruff
+```
+
+#### Install Ruff Extension for Visual Studio Code
+
+1. Open Visual Studio Code
+2. Go to Extensions (Cmd+Shift+X on macOS, Ctrl+Shift+X on Windows/Linux)
+3. Search for "Ruff"
+4. Install the official **Ruff** extension by Astral Software
+
+Alternatively, install via command line:
+
+```bash
+code --install-extension charliermarsh.ruff
+```
 
 ### 1️⃣ Clone the Repository
 
@@ -90,7 +119,7 @@ uv python install 3.14
 uv python pin 3.14  # pins this version for the project
 ```
 
-### 2️⃣ Sync Dependencies with uv
+### 3️⃣ Sync Dependencies with uv
 
 This creates and activates a virtual environment automatically, installing all development dependencies (linters, formatters, type checkers, test tools, etc.).
 
@@ -98,7 +127,7 @@ This creates and activates a virtual environment automatically, installing all d
 uv sync --group dev
 ```
 
-### 3️⃣ Run the Project
+### 4️⃣ Run the Project
 
 ```bash
 uv run python -m python_blueprint.hello
@@ -110,7 +139,7 @@ Expected output:
 Hello, Python Blueprint! 👋
 ```
 
-### 4️⃣ Run Tests
+### 5️⃣ Run Tests
 
 All tests are located under tests/ and automatically discovered by pytest.
 
@@ -130,9 +159,12 @@ uv run coverage report
 Run individual tools via uv run:
 
 ```bash
-uv run black src tests/
-uv run flake8 src tests
-uv run isort src tests/
+# Ruff for linting and formatting (replaces black, flake8, isort, pyupgrade)
+uv run ruff check src tests/          # Lint code
+uv run ruff format src tests/         # Format code
+uv run ruff check --fix src tests/    # Auto-fix issues
+
+# Other tools
 uv run mypy src
 uv run bandit -r src
 uv run detect-secrets scan
